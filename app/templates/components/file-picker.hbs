@@ -1,25 +1,13 @@
 {{#if dropzone}}
-  <div class="file-picker__dropzone">
+  <div class="file-picker__dropzone {{if complete 'no-border file-picker__backdrop'}}">
+    {{#if imagePreviewSrc}}
+      <img src={{imagePreviewSrc}} class="file-picker__preview_img {{if isUploading 'opacity-2' 'opacity-8'}}">
+    {{/if}}
+
     {{yield}}
   </div>
 {{else}}
   {{yield}}
-{{/if}}
-
-{{#if preview}}
-  <div class="file-picker__preview"></div>
-{{/if}}
-
-{{#if progress}}
-  {{#if showProgress}}
-    {{#if isProgressSupported}}
-      <progress value={{progressValue}} max="100" class="file-picker__progress">{{progress}} %</progress>
-    {{else}}
-      <div class="file-picker__progress">
-        <span class="file-picker__progress__value" style={{progressStyle}}></span>
-      </div>
-    {{/if}}
-  {{/if}}
 {{/if}}
 
 {{input type="file" value=file accept=accept multiple=multiple class="file-picker__input"}}
